@@ -4,15 +4,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+       <script>
+        var userdetails={
+            UserName:"avon123",
+            Password:"avon@123"
+        }
+        function LoginClick(){
+            var username=document.getElementById("UserName").value;
+            var password=document.getElementById("Password").value;
+            var msg=document.getElementById("msg");
+            if(username===""){
+                msg.innerHTML="Please Enter User Name";
+            }else{
+                if(userdetails.UserName===username){
+                    if(userdetails.Password===password){
+                        document.write("Login Success..");
+                    }else{
+                        msg.innerHTML="invaid password".fontcolor('red');
+                    }
+                }
+                else{msg.innerHTML="invailid user Name".fontcolor('red');
+            }
+                
+                
+            }
+
+        }
+    </script>
+    <style>
+        .bca{
+           background: beige;
+        border-color: blue;
+        border-radius: 150px;
+        box-shadow: 5px 15px 4px darkblue;
+        }
+    </style>
 </head>
-<body>
+<body class="container-fluid">
+   <div id="bg" class="bca">
     <fieldset>
-        <legend align="center" color="blue">avon</legend>
+        <legend align="center"><h1><span class="bi bi-person">user login</span></h1></legend>
         <dl align="center">
-            <dt>satnami</dt>
-            <dd>brothers</dd>
+            <dt>User Name</dt>
+            <dd><input type="text" id="UserName"></dd>
+            <dt>Passwword</dt>
+            <dd><input type="password" id="Password"></dd>
         </dl>
+        <div align="center"><button class="btn btn-primary"  onclick="LoginClick()">Login</button></div>
+        <h2 id="msg" align="center"></h2>
     </fieldset>
+   </div>    
 </body>
 </html>
