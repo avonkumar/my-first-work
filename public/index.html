@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="../public/favicon/Untitled2.png">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script>
+        function LoadCategories(){
+            fetch("http://fakestoreapi.com/products/categories")
+            .then(res=>res.json())
+            .then(data=>{
+                data.unshift("all");
+                $.each(data,(key,val)=>{
+                    $(`<option>${val}</option>`).appendTo("select");
+                })
+            })
+        }
+
+        function LoadProducts(url){
+            $("main").html("");
+            fetch(url)
+            .then(res=>res.json())
+            .then(data=>{
+                $.each(data,(key,val)=>{
+                    $(`
+                      <div class="card m-2 p-2" style="width:200px">
+                         <img src=${val.image} class="card-img-top" height="150">
+                         <div class="card-header" style="height:140px">
+                            <p>${val.title}</p>
+                         </div>
+                         <div class="card-body">
+                            <dl>
+                                <dt>Price</dt>
+                                <dd>${val.price}</dd>
+                                <dt>Rating</dt>
+                                <dd>${val.rating.rate}</dd>
+                            </dl>
+                         </div>
+                      </div>
+                    `).appendTo("main");
+                })
+            })
+        }
+
+      
+        $(function(){
+             LoadCategories();
+             LoadProducts("http://fakestoreapi.com/products");
+            $("select").change(()=>{
+                if($("select").val()=="all"){
+                    LoadProducts("http://fakestoreapi.com/products");
+                } else {
+                    LoadProducts(`http://fakestoreapi.com/products/category/${$("select").val()}`);
+                }
+            })
+        })
+    </script>
+</head>
+<body class="container-fluid">
+    <header class="bg-dark text-white text-center p-2">
+       <h1><span class="bi bi-cart-fill"> Avon shoping store</span></h1>
+    </header>
+    <section class="row">
+        <nav class="col-2">
+            <div>
+                <label>Select Categories</label>
+                <div>
+                    <select class="form-select">
+
+                    </select>
+                </div>
+            </div>
+        </nav>
+        <main class="col-10 d-flex flex-wrap"></main>
+    </section>
+</body>
+</html>
