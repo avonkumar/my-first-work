@@ -1,84 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="jquery-3.5.1.min.js"></script>  
-    <link rel="shortcut icon" href="../public/favicon/Untitled2.png">
-    <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>     
-    <script>
-        function LoadCategories(){
-            fetch("http://fakestoreapi.com/products/categories")
-            .then(res=>res.json())
-            .then(data=>{
-                data.unshift("all");
-                $.each(data,(key,val)=>{
-                    $(`<option>${val}</option>`).appendTo("select");
-                })
-            })
+    <title>Portfolio</title>
+    <link rel="shortcut icon" href="Untitled2.png">
+    <link rel="stylesheet" href="../../i-Shop/node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        
+        body {
+            background-color: #090c51;
+            margin: 10px 5px 0 10px;
+            color: white;
         }
 
-        function LoadProducts(url){
-            $("main").html("");
-            fetch(url)
-            .then(res=>res.json())
-            .then(data=>{
-                $.each(data,(key,val)=>{
-                    $(`
-                      <div class="card m-2 p-2" style="width:200px">
-                         <img src=${val.image} class="card-img-top" height="150">
-                         <div class="card-header" style="height:140px">
-                            <p>${val.title}</p>
-                         </div>
-                         <div class="card-body">
-                            <dl>
-                                <dt>Price</dt>
-                                <dd>${val.price}</dd>
-                                <dt>Rating</dt>
-                                <dd>${val.rating.rate}</dd>
-                            </dl>
-                         </div>
-                      </div>
-                    `).appendTo("main");
-                })
-            })
+        header {
+            margin: 10px 0 0 0;
+            background-color: #1b1b5b;
+            padding: 6px;
         }
 
-      
-        $(function(){
-             LoadCategories();
-             LoadProducts("http://fakestoreapi.com/products");
-            $("select").change(()=>{
-                if($("select").val()=="all"){
-                    LoadProducts("http://fakestoreapi.com/products");
-                } else {
-                    LoadProducts(`http://fakestoreapi.com/products/category/${$("select").val()}`);
-                }
-            })
-        })
-    </script>
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            list-style: none;
+            margin-right: 23px;
+
+        }
+
+        nav ul li:hover {
+            color: #979ce0;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .left {
+            font-size: 2rem;
+        }
+
+        li a {
+            text-decoration: none;
+        }
+
+        .FirstSection {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        img {
+            margin-top: 40px;
+
+        }
+
+        .left-item {
+            margin-top: 97px;
+            font-size: 31px;
+            color: white;
+            width: 35%;
+            text-align: center;
+
+        }
+
+        .utiliti {
+            font-size: 28px;
+            margin: 21px 0 0 16px;
+            font-family: sans-serif;
+        }
+
+        .utilitiOne {
+            color: #77b1e8;
+        }
+
+        .animation {
+            margin: 19px 0px 0 77px;
+            color: gray;
+        }
+
+        hr {
+            margin: 39px 19px 0 19px;
+            border-color: #505264;
+        }
+
+        section.SecondSection {
+            padding: 19px 0 0 94px;
+            font-family: monospace;
+        }
+
+        div.Highlit {
+            font-weight: bold;
+            font-size: 32px;
+            font-family: -webkit-body;
+            margin: -17px 0px 0 -48px;
+        }
+
+        .bottomH {
+            margin: 16px 94px 0 38px;
+        }
+
+        .card {
+            height: 300px;
+            width: 260px;
+            background-color: #161848;
+            margin: 100px 50px 100px 50px;
+            border: 5px solid rgba(112, 85, 201, 0.595);
+            border-bottom-left-radius: 63px;
+            border-top-right-radius: 63px;
+            box-shadow: -5px -4px 6px crimson;
+        }
+        .card:hover{
+            height: 310px;
+            width: 310px;
+            cursor: pointer;
+            background-color: #161848;
+            border: 5px solid rgba(112, 85, 201, 0.595);
+            border-bottom-left-radius: 63px;
+            border-top-right-radius: 63px;
+            box-shadow: -9px -9px 6px crimson;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+        
+        }
+        dl{
+            display: grid;
+            grid-template-columns: 110px 100px;
+            padding: 20px;
+            line-height: 35px;
+            font-family: sans-serif;
+            text-shadow: 4px 4px 6px black;
+        }
+    </style>
 </head>
-<body class="container-fluid">
-    <header class="bg-dark text-white text-center p-2">
-       <h1><span class="bi bi-cart-fill"> Avon shoping store</span></h1>
-    </header>
-    <section class="row">
-        <nav class="col-2">
-            <div>
-                <label>Select Categories</label>
-                <div>
-                    <select class="form-select">
 
-                    </select>
-                </div>
+<body class="container-fluid">
+    <header>
+        <nav>
+            <div class="left">Avon kumar</div>
+            <div class="right">
+                <ul>
+                    <li>Home</li>
+                    <li>About</li>
+                    <li>Services</li>
+                    <li>Projects</li>
+                    <li>Contact</li>
+                </ul>
             </div>
         </nav>
-        <main class="col-10 d-flex flex-wrap"></main>
+    </header>
+    <section class="FirstSection">
+        <div class="left-item">
+            Hi, My Name is <span id="utilitiOne">Avon</span>
+            <div class="utiliti">And I am Become a...</div>
+            <div class="animation">
+                <span id="element"></span>
+            </div>
+
+        </div>
+        <div class="right-item">
+            <img src="webDeveloper.png" title="Web Developer" width="350px">
+        </div>
     </section>
+    <hr>
+    <section class="SecondSection">
+        <p>What I Have Done</p>
+        <div class="Highlit">
+            Education Details
+        </div>
+        <hr class="bottomH">
 
-
-    
+        <div class=" card-container">
+            <div class="card">
+<h2 style="text-align: center; font-weight: bold; text-shadow: 2px 3px 6px black;">Details</h2>
+                <dl>
+                    <dt>Qualification :</dt>
+                    <dd>10th</dd>
+                    <dt>Passed From :</dt>
+                    <dd>2014</dd>
+                    <dt>Percentage :</dt>
+                    <dd>64 %</dd>
+                    <dt>Board :</dt>
+                    <dd>M.P. Board Bhopal</dd>
+                </dl>
+            </div>
+            <div class="card">
+                <h2 style="text-align: center; font-weight: bold; text-shadow: 2px 3px 6px black;">Details</h2>
+                <dl>
+                    <dt>Qualification :</dt>
+                    <dd>12th</dd>
+                    <dt>Passed From :</dt>
+                    <dd>2016</dd>
+                    <dt>Percentage :</dt>
+                    <dd>64 %</dd>
+                    <dt>Board :</dt>
+                    <dd>M.P. Board Bhopal.</dd>
+                </dl>
+               
+            </div>
+            <div class="card">
+                <h2 style="text-align: center; font-weight: bold; text-shadow: 2px 3px 6px black;">Details</h2>
+                <dl>
+                    <dt>Qualification :</dt>
+                    <dd>Electrician</dd>
+                    <dt>Passed From :</dt>
+                    <dd>2018</dd>
+                    <dt>Percentage :</dt>
+                    <dd>73 %</dd>
+                    <dt>Board :</dt>
+                    <dd>Modal ITI Bhopal.</dd>
+                </dl>
+            </div>
+            <div class="card">
+                <h2 style="text-align: center; font-weight: bold; text-shadow: 2px 3px 6px black;">Details</h2>
+                <dl>
+                    <dt>Qualification :</dt>
+                    <dd>BCA</dd>
+                    <dt>Passed From :</dt>
+                    <dd>2022</dd>
+                    <dt>Percentage :</dt>
+                    <dd>79 %</dd>
+                    <dt>University :</dt>
+                    <dd>Barkatullah University, Bhopal.</dd>
+                </dl>
+            </div>
+        </div>
+    </section>
+    <footer>
+        
+    </footer>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script>
+        var typed = new Typed('#element', {
+            strings: ['Web developer', 'Java Developer', 'React Developer', 'DBMS Developer'],
+            typeSpeed: 50,
+        });
+    </script>
 </body>
+
 </html>
